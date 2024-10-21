@@ -9,6 +9,7 @@ import androidx.compose.runtime.Composable
 import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
 import androidx.navigation.compose.rememberNavController
+import com.uvg.laboratorio6pm.network.PokemonDetailScreen
 import com.uvg.laboratorio6pm.network.PokemonListScreen
 
 class MainActivity : ComponentActivity() {
@@ -28,6 +29,10 @@ fun MyApp() {
         NavHost(navController = navController, startDestination = "pokemonList") {
             composable("pokemonList") {
                 PokemonListScreen(navController)
+            }
+            composable("detail/{pokemonName}") { backStackEntry ->
+                val pokemonName = backStackEntry.arguments?.getString("pokemonName") ?: ""
+                PokemonDetailScreen(pokemonName, navController)
             }
         }
     }
